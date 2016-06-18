@@ -1,0 +1,272 @@
+Enter password: ***
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1
+Server version: 5.1.33-community MySQL Community Server (GPL)
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql> use rail_by_amay;
+Database changed
+mysql> show tables;
++------------------------+
+| Tables_in_rail_by_amay |
++------------------------+
+| class                  |
+| scn                    |
+| train_type             |
++------------------------+
+3 rows in set (0.06 sec)
+
+mysql> desc scn;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| StationCode | varchar(20) | YES  |     | NULL    |       |
+| StationName | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+2 rows in set (0.12 sec)
+
+mysql> desc class;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| ClassId   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| ClassName | varchar(20) | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from train_type;
++-----------+--------+
+| TypeName  | TypeId |
++-----------+--------+
+| SUPERFAST |      1 |
+| RAJDHANI  |      2 |
+| SHATABDI  |      3 |
++-----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from scn;
++-------------+-------------+
+| StationCode | StationName |
++-------------+-------------+
+| JP          | JAIPUR      |
+| NDLS        | NEW DELHI   |
+| BCT         | MUMBAI      |
+| LKO         | LUCKNOW     |
+| HWH         | KOLKATA     |
+| ALL         | AJMER       |
+| AK          | AKOLA       |
+| ALD         | ALLAHBAD    |
++-------------+-------------+
+8 rows in set (0.00 sec)
+
+mysql> create table train_info
+    -> (
+    -> train_no int primary key,
+    -> train_name varchar(50),
+    -> source_station varchar(100),
+    -> stop1 varchar(100),
+    -> stop2 varchar(100),
+    -> stop3 varchar(100),
+    -> desti_station varchar(100),
+    -> source_time time,
+    -> stop1_time time
+    -> ,
+    -> stop2_time time,
+    -> stop3_time time,
+    -> desti_time time,
+    -> type varchar(50) not null,
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to yo
+ur MySQL server version for the right syntax to use near ')' at line 17
+mysql> create table train_info
+    -> (
+    -> train_no int primary key not null,
+    -> train_name varchar(50) not null unique,
+    -> source_station varchar(100) not nll,
+    -> stop1_time time not null,
+    -> stop2_time time not null,
+    -> stop3_time time not null,
+    -> desti_time time not null,
+    -> stop1_station varchar(100) not nll,
+    -> stop2_station varchar(100) not nll,
+    -> stop3_station varchar(100) not nll,
+    -> desti_station varchar(100) not nll,
+    -> type varchar(50) not null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to yo
+ur MySQL server version for the right syntax to use near 'nll,
+stop1_time time not null,
+stop2_time time not null,
+stop3_time time not nul' at line 5
+mysql> create table train_info
+    -> (
+    -> train_no int primary key not null,
+    -> train_name varchar(50) not null unique,
+    -> source_station varchar(100) not nll,
+    -> stop1_time time not null,
+    -> stop2_time time not null,
+    -> stop3_time time not null,
+    -> desti_time time not null,
+    -> stop1_station varchar(100) not nll,
+    -> stop2_station varchar(100) not null,
+    -> stop1_station varchar(100) not null,
+    -> stop3_station varchar(100) not null,
+    -> desti_station varchar(100) not null,
+    -> type varchar(100) not null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to yo
+ur MySQL server version for the right syntax to use near 'nll,
+stop1_time time not null,
+stop2_time time not null,
+stop3_time time not nul' at line 5
+mysql> create table train_info
+    -> (
+    -> train_no int primary key not null,
+    -> train_name varchar(50) not null unique,
+    -> source_station varchar(100) not null,
+    -> stop1_station varchar(100) not null,
+    -> stop2_station varchar(100) not null,
+    -> stop3_station varchar(100) not null,
+    -> desti_station varchar(100) not null,
+    -> type varchar(100) not null);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql>
+mysql> alter table train_info
+    -> add source_time time not null,
+    -> add stop1_time time not null;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table train_info
+    -> add stop2_time time not null;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table train_info
+    -> add stop3_time time not null,
+    -> add desti_time time not null;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from train_info;
+Empty set (0.00 sec)
+
+mysql> desc train_info;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| train_no       | int(11)      | NO   | PRI | NULL    |       |
+| train_name     | varchar(50)  | NO   | UNI | NULL    |       |
+| source_station | varchar(100) | NO   |     | NULL    |       |
+| stop1_station  | varchar(100) | NO   |     | NULL    |       |
+| stop2_station  | varchar(100) | NO   |     | NULL    |       |
+| stop3_station  | varchar(100) | NO   |     | NULL    |       |
+| desti_station  | varchar(100) | NO   |     | NULL    |       |
+| type           | varchar(100) | NO   |     | NULL    |       |
+| source_time    | time         | NO   |     | NULL    |       |
+| stop1_time     | time         | NO   |     | NULL    |       |
+| stop2_time     | time         | NO   |     | NULL    |       |
+| stop3_time     | time         | NO   |     | NULL    |       |
+| desti_time     | time         | NO   |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+13 rows in set (0.00 sec)
+
+mysql> select * from scn;
++-------------+-------------+
+| StationCode | StationName |
++-------------+-------------+
+| JP          | JAIPUR      |
+| NDLS        | NEW DELHI   |
+| BCT         | MUMBAI      |
+| LKO         | LUCKNOW     |
+| HWH         | KOLKATA     |
+| ALL         | AJMER       |
+| AK          | AKOLA       |
+| ALD         | ALLAHBAD    |
++-------------+-------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from train_info;
+Empty set (0.00 sec)
+
+mysql> insert into train_info(train_no,train_name,source_station,stop1_station,stop2_station,stop
+3_station,desti_station,type,source_time,stop1_time,stop2_time,stop3_time,desti_time) values(2247
+8),upper('jaipur jodhpur intercity'),upper('JAIPUR'),upper('ALLAHBAD'),upper('MUMBAI'),upper('LUC
+KNOW'),upper('KOLKATA'),upper('SHATABDI'),('04:00'),('05:00'),('06:00'),('07:00'),('16:00'));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to yo
+ur MySQL server version for the right syntax to use near 'upper('jaipur jodhpur intercity'),upper
+('JAIPUR'),upper('ALLAHBAD'),upper('MUMBA' at line 1
+mysql> alter table train_infoinsert into train_info(train_no,train_name,source_station,stop1_stat
+ion,stop2_station,stop3_station,desti_station,type,source_time,stop1_time,stop2_time,stop3_time,d
+esti_time) values(22478,upper('jaipur jodhpur intercity'),upper('JAIPUR'),upper('ALLAHBAD'),upper
+('MUMBAI'),upper('LUCKNOW'),upper('KOLKATA'),upper('SHATABDI'),('04:00'),('05:00'),('06:00'),('07
+:00'),('16:00'));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to yo
+ur MySQL server version for the right syntax to use near 'into train_info(train_no,train_name,sou
+rce_station,stop1_station,stop2_station,s' at line 1
+mysql> insert into train_info(train_no,
+    -> train_name,source_station,stop1_station,stop2_station,
+    -> stop3_station,desti_station,type,source_time,stop1_time,
+    -> stop2_time,stop3_time,desti_time) values(22478,
+    -> upper('jaipur jodhpur intercity')
+    -> ,upper('JAIPUR'),upper('ALLAHBAD'),upper('MUMBAI'),
+    -> upper('LUCKNOW'),upper('KOLKATA'),upper('SHATABDI'),('04:00'),
+    -> ('05:00'),('06:00'),('07:00'),('16:00'));
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from train_info;
++----------+--------------------------+----------------+---------------+---------------+---------
+------+---------------+----------+-------------+------------+------------+------------+----------
+--+
+| train_no | train_name               | source_station | stop1_station | stop2_station | stop3_st
+ation | desti_station | type     | source_time | stop1_time | stop2_time | stop3_time | desti_tim
+e |
++----------+--------------------------+----------------+---------------+---------------+---------
+------+---------------+----------+-------------+------------+------------+------------+----------
+--+
+|    22478 | JAIPUR JODHPUR INTERCITY | JAIPUR         | ALLAHBAD      | MUMBAI        | LUCKNOW
+      | KOLKATA       | SHATABDI | 04:00:00    | 05:00:00   | 06:00:00   | 07:00:00   | 16:00:00
+  |
++----------+--------------------------+----------------+---------------+---------------+---------
+------+---------------+----------+-------------+------------+------------+------------+----------
+--+
+1 row in set (0.00 sec)
+
+mysql> create table train_and_class
+    -> (
+    -> train_no int,
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to yo
+ur MySQL server version for the right syntax to use near '' at line 3
+mysql> create table train_and_class
+    -> (
+    -> train_no int not null,
+    -> class ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to yo
+ur MySQL server version for the right syntax to use near '' at line 4
+mysql> desc class;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| ClassId   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| ClassName | varchar(20) | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> create table train_and_class
+    -> (
+    -> train_no int not null,
+    -> classid int not null);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table train_and_class
+    -> ;
+ERROR 1113 (42000): A table must have at least 1 column
+mysql> create table train_and_days
+    -> (
+    -> train_no int not null,
+    -> dayname enum('monday','tuesday','wednusday','thursday','friday','saturday','sunday','all')
+);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>

@@ -1,0 +1,83 @@
+Create database rail_by_amay;
+Use rail_by_amay;
+CREATE TABLE train_type (
+  TypeName varchar(20) DEFAULT NULL
+) ;
+CREATE TABLE scn (
+  StationCode varchar(20) DEFAULT NULL,
+  StationName varchar(20) DEFAULT NULL
+) ;
+CREATE TABLE class (
+  ClassName varchar(20) NOT NULL
+) ;
+CREATE TABLE train_info (
+  train_no int(11) NOT NULL,
+  train_name varchar(50) NOT NULL,
+  source_station varchar(100) NOT NULL,
+  stop1_station varchar(100) NOT NULL,
+  stop2_station varchar(100) NOT NULL,
+  stop3_station varchar(100) NOT NULL,
+  desti_station varchar(100) NOT NULL,
+  type varchar(100) NOT NULL,
+  source_time time NOT NULL,
+  stop1_time time NOT NULL,
+  stop2_time time NOT NULL,
+  stop3_time time NOT NULL,
+  desti_time time NOT NULL,
+  PRIMARY KEY (train_no),
+  UNIQUE KEY train_name (train_name)
+) ;
+CREATE TABLE train_and_days (
+  train_no int(11) NOT NULL,
+  dayname enum('monday','tuesday','wednesday','thursday','friday','saturday','sunday','all') NOT NULL
+) ;
+CREATE TABLE train_and_class (
+  train_no int(11) NOT NULL,
+  classname varchar(30) DEFAULT NULL
+) ;
+INSERT INTO `train_type` (`TypeName`) VALUES ('SUPERFAST');
+INSERT INTO `train_type` (`TypeName`) VALUES ('RAJDHANI');
+INSERT INTO `train_type` (`TypeName`) VALUES ('SHATABDI');
+INSERT INTO `scn` (`StationCode`,`StationName`) VALUES ('JP','JAIPUR');
+INSERT INTO `scn` (`StationCode`,`StationName`) VALUES ('NDLS','NEW DELHI');
+INSERT INTO `scn` (`StationCode`,`StationName`) VALUES ('BCT','MUMBAI');
+INSERT INTO `scn` (`StationCode`,`StationName`) VALUES ('LKO','LUCKNOW');
+INSERT INTO `scn` (`StationCode`,`StationName`) VALUES ('HWH','KOLKATA');
+INSERT INTO `scn` (`StationCode`,`StationName`) VALUES ('ALL','AJMER');
+INSERT INTO `scn` (`StationCode`,`StationName`) VALUES ('AK','AKOLA');
+INSERT INTO `scn` (`StationCode`,`StationName`) VALUES ('ALD','ALLAHBAD');
+
+INSERT INTO `class` (`ClassName`) VALUES ('SECOND AC');
+INSERT INTO `class` (`ClassName`) VALUES ('THIRD AC');
+INSERT INTO `class` (`ClassName`) VALUES ('FIRST AC');
+INSERT INTO `class` (`ClassName`) VALUES ('SLEEPER');
+
+INSERT INTO `train_info` (`train_no`,`train_name`,`source_station`,`stop1_station`,`stop2_station`,`stop3_station`,`desti_station`,`type`,`source_time`,`stop1_time`,`stop2_time`,`stop3_time`,`desti_time`) VALUES (5756,'HGFHGFH','ALLAHBAD','AJMER','AJMER','KOLKATA','AJMER','SUPERFAST','05:00:00','00:00:00','00:00:00','00:00:00','00:00:00');
+INSERT INTO `train_info` (`train_no`,`train_name`,`source_station`,`stop1_station`,`stop2_station`,`stop3_station`,`desti_station`,`type`,`source_time`,`stop1_time`,`stop2_time`,`stop3_time`,`desti_time`) VALUES (5758,'HGFHGFHHJ','ALLAHBAD','NEW DELHI','AJMER','LUCKNOW','AJMER','SUPERFAST','05:00:00','00:00:00','00:00:00','00:00:00','00:00:00');
+INSERT INTO `train_info` (`train_no`,`train_name`,`source_station`,`stop1_station`,`stop2_station`,`stop3_station`,`desti_station`,`type`,`source_time`,`stop1_time`,`stop2_time`,`stop3_time`,`desti_time`) VALUES (10000,'HARISH','ALLAHBAD','NEW DELHI','AJMER','LUCKNOW','MUMBAI','SUPERFAST','05:00:00','00:00:00','00:00:00','00:00:00','00:00:00');
+INSERT INTO `train_info` (`train_no`,`train_name`,`source_station`,`stop1_station`,`stop2_station`,`stop3_station`,`desti_station`,`type`,`source_time`,`stop1_time`,`stop2_time`,`stop3_time`,`desti_time`) VALUES (22478,'JAIPUR JODHPUR INTERCITY','JAIPUR','ALLAHBAD','MUMBAI','LUCKNOW','KOLKATA','SHATABDI','04:00:00','05:00:00','06:00:00','07:00:00','16:00:00');
+INSERT INTO `train_info` (`train_no`,`train_name`,`source_station`,`stop1_station`,`stop2_station`,`stop3_station`,`desti_station`,`type`,`source_time`,`stop1_time`,`stop2_time`,`stop3_time`,`desti_time`) VALUES (43423,'DFGDHDG','AJMER','JAIPUR','JAIPUR','KOLKATA','JAIPUR','RAJDHANI','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00');
+INSERT INTO `train_and_days` (`train_no`,`dayname`) VALUES (451,'monday');
+INSERT INTO `train_and_days` (`train_no`,`dayname`) VALUES (451,'saturday');
+INSERT INTO `train_and_days` (`train_no`,`dayname`) VALUES (451,'sunday');
+INSERT INTO `train_and_days` (`train_no`,`dayname`) VALUES (5756,'monday');
+INSERT INTO `train_and_days` (`train_no`,`dayname`) VALUES (5756,'tuesday');
+INSERT INTO `train_and_days` (`train_no`,`dayname`) VALUES (5756,'sunday');
+INSERT INTO `train_and_days` (`train_no`,`dayname`) VALUES (5756,'all');
+INSERT INTO `train_and_days` (`train_no`,`dayname`) VALUES (5758,'all');
+INSERT INTO `train_and_days` (`train_no`,`dayname`) VALUES (5758,'all');
+INSERT INTO `train_and_days` (`train_no`,`dayname`) VALUES (10000,'all');
+INSERT INTO `train_and_days` (`train_no`,`dayname`) VALUES (43423,'wednesday');
+INSERT INTO `train_and_class` (`train_no`,`classname`) VALUES (5756,'FIRST AC');
+INSERT INTO `train_and_class` (`train_no`,`classname`) VALUES (5756,'SLEEPER');
+INSERT INTO `train_and_class` (`train_no`,`classname`) VALUES (5756,'FIRST AC');
+INSERT INTO `train_and_class` (`train_no`,`classname`) VALUES (5756,'SLEEPER');
+INSERT INTO `train_and_class` (`train_no`,`classname`) VALUES (5758,'FIRST AC');
+INSERT INTO `train_and_class` (`train_no`,`classname`) VALUES (5758,'SLEEPER');
+INSERT INTO `train_and_class` (`train_no`,`classname`) VALUES (5758,'SECOND AC');
+INSERT INTO `train_and_class` (`train_no`,`classname`) VALUES (5758,'SLEEPER');
+INSERT INTO `train_and_class` (`train_no`,`classname`) VALUES (5758,'THIRD AC');
+INSERT INTO `train_and_class` (`train_no`,`classname`) VALUES (10000,'SECOND AC');
+INSERT INTO `train_and_class` (`train_no`,`classname`) VALUES (10000,'SLEEPER');
+INSERT INTO `train_and_class` (`train_no`,`classname`) VALUES (10000,'THIRD AC');
+INSERT INTO `train_and_class` (`train_no`,`classname`) VALUES (43423,'SECOND AC');
